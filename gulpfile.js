@@ -17,7 +17,7 @@ var dirs = {
               'assets/img/**/*.gif',
               'assets/img/**/*.png'],
     svg:     ['assets/img/**/*.svg'],
-    js:      ['assets/js/*.js'],
+    js:      ['assets/js/**/*.js'],
     data:    ['assets/data/*.json'],
     sass:    ['assets/sass/*.scss'],
     fonts:   ['assets/fonts/*'],

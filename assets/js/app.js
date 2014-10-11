@@ -1,4 +1,4 @@
-var app = angular.module('Dossier', ['ui.router']);
+var app = angular.module('Dossier', ['ui.router', 'ngSails']);
 
 /* AngularJS calling order
 1. app.config()
@@ -8,7 +8,9 @@ var app = angular.module('Dossier', ['ui.router']);
 5. directive's link functions (again if found)
 */
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
+
+  // $sailsProvider.url = 'http://foo.bar';
 
   $stateProvider
     .state('index', {
