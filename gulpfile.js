@@ -8,6 +8,11 @@ var gulp = require('gulp')
 // Autoload Gulp tasks from package.json
 var plugins = gulpLoadPlugins();
 
+// Get js libs from assets/js/dependencies and main bower_component files
+var localLibs = ['assets/js/dependencies/*.js'];
+var bowerLibs = mainBowerFiles().map(function(x){ return __dirname+"/" ? x.replace(__dirname+"/","") : x });
+var jsLibs = localLibs.concat(bowerLibs);
+
 // Paths
 var dirs = {
   dev: {
@@ -17,7 +22,8 @@ var dirs = {
               'assets/img/**/*.gif',
               'assets/img/**/*.png'],
     svg:     ['assets/img/**/*.svg'],
-    js:      ['assets/js/**/*.js'],
+    js:      ['assets/js/*.js'],
+    jslibs:  jsLibs,
     data:    ['assets/data/*.json'],
     sass:    ['assets/sass/*.scss'],
     fonts:   ['assets/fonts/*'],
