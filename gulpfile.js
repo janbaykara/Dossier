@@ -27,13 +27,13 @@ var dirs = {
     data:    ['assets/data/*.json'],
     sass:    ['assets/sass/*.scss'],
     fonts:   ['assets/fonts/*'],
-    html:    ['assets/templates/*']
+    html:    ['assets/partials/*']
   },
   prod: {
     images:   '.tmp/public/images',
     scripts:  '.tmp/public/scripts',
     styles:   '.tmp/public/styles',
-    views:    '.tmp/public/views'
+    views:    '.tmp/public/partials'
   }
 }
 
