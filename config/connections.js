@@ -19,7 +19,16 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.connections.html
  */
 
+var local = require('./local.js');
+
 module.exports.connections = {
+
+  orchestrateServer : {
+      adapter: "sails-orchestrate",
+      masterkey: local.ORCHESTRATE_MASTER_KEY,
+      developmentkey: local.ORCHESTRATE_DEV_KEY,
+      status: process.env.NODE_ENV || "dev"
+  },
 
   /***************************************************************************
   *                                                                          *
