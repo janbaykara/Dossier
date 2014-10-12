@@ -30,7 +30,31 @@ $golden-ratio: 1.61803398875;
 }
 
 // -------
-//  Utility mixins
+//  Utility mixins/functions
+
+@function ensureTextContrast($text-color, $background-color) {
+  /* Checking text lightness difference from accent background */
+  $diff: lightness($text-color) - lightness($background-color);
+
+  /* If low brightness difference */
+  @if abs($diff) < 15% {
+
+    /* Dark background */
+    @if lightness($background-color) < lightness(#aaaaaa) {
+      @return lighten($text-color, 30%);
+    }
+
+    /* Light background */
+    @else {
+      @return darken($text-color, 30%);
+    }
+  }
+
+  /* High enough contrast; @return original color */
+  @else {
+    @return $text-color;
+  }
+}
 
 @mixin no-webkit {
     -webkit-appearance: none;

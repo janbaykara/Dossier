@@ -7,9 +7,13 @@
   box-sizing: border-box;
 }
 
+html, body {
+  @extend .s100;
+}
+
 ::selection { color: $brand-color;  background: $background-color; }
 
-.content {
+.app__content {
   max-width: 640px;
   margin: 0 auto;
   padding: 0 1em;

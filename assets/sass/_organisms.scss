@@ -6,8 +6,11 @@
   margin-bottom: 1em;
   border-bottom: 1px solid $silver;
 
-  background: $silver;
   padding: 5em 0 1em;
+
+  &--quiet {
+    padding: 0.5em;
+  }
 }
 
 .app__footer {

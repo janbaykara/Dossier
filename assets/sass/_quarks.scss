@@ -2,22 +2,57 @@
   Quarks
 */
 
+// ----- Positional/dimensional ------
+//
+.rel { position: relative; }
+.abs { position: absolute; }
+//
+.inl    { display: inline; }
+.inl-b  { display: inline-block; }
+.block  { display: block; }
+.tbl    { display: table; }
+.tbl-c  { @extend .rel; display: table-cell; }
+//
+.fl-l { float: left; }
+.fl-r { float: right; }
+.fl-n { float: none; }
+//
+.aln-v-t  { vertical-align: top; }
+.aln-v-m  { vertical-align: middle; }
+.aln-v-b  { vertical-align: bottom; }
+.aln-h-l  { text-align: left; }
+.aln-h-m  { text-align: center; }
+.aln-h-r  { text-align: right; }
+// Scales
+@for $i from 1 through 10 {
+  .w#{$i}0 { width: $i * 10%; }
+  .h#{$i}0 { height: $i * 10%; }
+  .s#{$i}0 { @extend .w#{$i}0; @extend .h#{$i}0; }
+  // .s#{$i}0 { width: $i * 10%; height: $i * 10%; }
+}
+
+// ------ Typographical -------
 //
 .em4 { font-size: 4em; letter-spacing: -0.03em; }
 .em2 { font-size: 2em; letter-spacing: -0.01em; }
 .em_8 { font-size: 0.8em; }
-
 //
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 
-//
-.inherit {
+// ------ Overides ------
+.inherit { &, &:hover, &:active, &:focus {
   display: inherit;
   line-height: inherit;
   font-weight: inherit;
   font-style: inherit;
   font-size: inherit;
   color: inherit;
-}
+} }
 
+// ------ Skin ------
+.color-brand { color: $brand-color; }
+.bg-brand { background-color: $brand-color; }
+.border-brand { border-color: $brand-color; }
+.on-brand { color: ensureTextContrast($brand-color,$brand-color); }
+.bg-on-brand { background-color: ensureTextContrast($brand-color,$brand-color); }

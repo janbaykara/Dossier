@@ -6,19 +6,16 @@
 %body-type {
   font: 16px/1.3em 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
 }
-
-%header-type {
-  @extend %body-type;
-}
-
-// Applied
 html, body {
   @extend %body-type;
 }
 
-#{$headings} {
-  @extend %header-type;
-}
+// %header-type {
+//   @extend %body-type;
+// }
+// #{$headings} {
+//   @extend %header-type;
+// }
 
 // Rendering
 * {
