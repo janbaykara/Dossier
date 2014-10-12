@@ -43,8 +43,8 @@ module.exports.routes = {
   '/auth/twitter'          : 'AuthController.twitter',
   '/auth/twitter/callback' : 'AuthController.twitter/callback',
 
-  // '/auth/dropbox'          : 'AuthController.dropbox',
-  // '/auth/dropbox/callback' : 'AuthController.dropbox/callback'
+  '/auth/dropbox'          : 'AuthController.dropbox',
+  '/auth/dropbox/callback' : 'AuthController.dropbox/callback'
 
   /***************************************************************************
   *                                                                          *
