@@ -1,7 +1,7 @@
 app.controller('AppController', function($scope, $sails) {
 
   (function () {
-    $sails.get("/things")
+    $sails.get("/dossiers")
       .success(function (data) {
         $scope.bars = data;
       })

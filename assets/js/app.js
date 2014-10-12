@@ -23,18 +23,18 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
     })
 
     .state('home', {
-        url: '/things',
+        url: '/dossiers',
         views: {
             '': { templateUrl: 'partials/template.content.html' },
             '@home': { templateUrl: 'partials/view.home.html' }
         }
     })
 
-    .state('thing', {
-        url: '/things/:id',
+    .state('dossier', {
+        url: '/dossiers/:id',
         views: {
             '': { templateUrl: 'partials/template.content.html' },
-            '@thing': { templateUrl: 'partials/view.thing.html' }
+            '@dossier': { templateUrl: 'partials/view.dossier.html' }
         }
     })
 
