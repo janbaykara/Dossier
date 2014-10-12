@@ -36,7 +36,15 @@ module.exports.routes = {
   '/': { view: 'default' },
 
   // Render AngularJS jade partials
-  '/partials/:name': 'PartialController.render'
+  '/partials/:name': 'PartialController.render',
+
+  '/logout'                : 'AuthController.logout',
+
+  '/auth/twitter'          : 'AuthController.twitter',
+  '/auth/twitter/callback' : 'AuthController.twitter/callback',
+
+  // '/auth/dropbox'          : 'AuthController.dropbox',
+  // '/auth/dropbox/callback' : 'AuthController.dropbox/callback'
 
   /***************************************************************************
   *                                                                          *

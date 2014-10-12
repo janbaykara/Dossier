@@ -3,15 +3,14 @@
 */
 
 module.exports = {
-  identity: 'user',
-  schema: false,
+  identity: 'User',
+  schema: true,
+
   attributes: {
-    name: { type: 'string', required: true },
-    provider: { type: 'string', required: true },
-    uid: { type: 'integer', required: true },
-    dossiers: {
-      model: 'dossier',
-      via: 'user'
-    }
+    name      : { type: 'string', unique: true },
+    email     : { type: 'email',  unique: true },
+    uid       : { type: 'string',  unique: true },
+    provider  : { type: 'string' },
+    dossiers  : { collection: 'Dossier', via: 'user' }
   }
 };
