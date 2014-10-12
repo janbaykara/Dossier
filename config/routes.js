@@ -32,9 +32,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  // Server-side HTML skeleton
+  '/': { view: 'default' },
+
+  // Render AngularJS jade partials
+  '/partials/:name': 'PartialController.render'
 
   /***************************************************************************
   *                                                                          *

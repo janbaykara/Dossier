@@ -1,0 +1,14 @@
+.app__content
+  h2.em2 {{user.name}}, your dossiers are ready for you...
+    form.create-dossier
+      input.transparent-input(type='text', name='name')
+      ul
+        | -- categories --
+      ul
+        | -- subcats --
+      ul
+        | -- tags --
+    ul
+      li(ng-repeat='dossier in dossiers')
+        h3(ng-bind='dossier.name')
+        p(ng-bind='dossier.description')

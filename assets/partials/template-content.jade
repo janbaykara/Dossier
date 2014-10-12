@@ -1,0 +1,13 @@
+header.app__header.bg-brand(role='banner')
+  .app__content
+    span.em4.bold.black.app__header__title Dossier
+    nav.h-li.app__nav(role='menubar')
+      a.invisible(href='/logout') Logout
+.app__body(ui-view='')
+footer.app__footer
+  .app__content
+    span.em_8.silver
+      | Created by&nbsp;
+      a.inherit.bold(href='http://github.com/JanBaykara')
+        i.fa.fa-github-square
+        | &nbsp;Jan Baykara

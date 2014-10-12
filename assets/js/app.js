@@ -17,38 +17,33 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
     .state('index', {
         url: '/',
         views: {
-            '': { templateUrl: 'partials/template.content.html' },
-            '@index': { templateUrl: 'partials/view.index.html' }
+            '': { templateUrl: 'partials/template-content' },
+            '@index': { templateUrl: 'partials/view-index' }
         }
     })
 
     .state('home', {
-        url: '/dossiers',
+        url: '/home',
         views: {
-            '': { templateUrl: 'partials/template.content.html' },
-            '@home': { templateUrl: 'partials/view.home.html' }
+            '': { templateUrl: 'partials/template-content' },
+            '@home': { templateUrl: 'partials/view-home' }
         }
     })
 
     .state('dossier', {
         url: '/dossiers/:id',
         views: {
-            '': { templateUrl: 'partials/template.content.html' },
-            '@dossier': { templateUrl: 'partials/view.dossier.html' }
+            '': { templateUrl: 'partials/template-content' },
+            '@dossier': { templateUrl: 'partials/view-dossier' }
         }
     })
 
     .state('signin', {
         url: '/signin',
         views: {
-            '': { templateUrl: 'partials/template.single.html' },
-            '@signin': { templateUrl: 'partials/view.signin.html' }
+            '': { templateUrl: 'partials/template-single' },
+            '@signin': { templateUrl: 'partials/view-signin' }
         }
-    })
-
-    .state('sandbox', {
-        url: '/sandbox',
-        templateUrl: 'partials/template.sandbox.html'
     })
 
     $urlRouterProvider.otherwise('/');
