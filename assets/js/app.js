@@ -1,13 +1,5 @@
 var app = angular.module('Dossier', ['ui.router']);
 
-/* AngularJS calling order
-1. app.config()
-2. app.run()
-3. directive's compile functions (if they are found in the dom)
-4. app.controller()
-5. directive's link functions (again if found)
-*/
-
 app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -43,11 +35,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 })
 
-app.run(function ($state, UserService) {
+app.run(function ($rootScope, $location, $state, UserService) {
 // # !!! Not working
-  if(UserService.sessionStatus == false) {
-    $state.go('index');
-  } else {
-    $state.go('home');
-  }
+  $rootScope.$on('$stateChangeStart', function() {
+    UserService.checkAuth();
+  });
 })

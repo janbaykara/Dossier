@@ -1,23 +1,30 @@
-app.factory('UserService', function($http) {
+app.factory('UserService', function($http, $state, $location) {
 
+  var bogusSession = injectedSession;
   var pre;
   var sessionStatus;
 
-  function init() {                   // Logged in  : Logged out
-    pre = appUser.user != undefined ? appUser.user  : { name: 'Logged out', uid: '0' };
-    sessionStatus = pre.uid != "0"  ? true          : false;
+  function init() {
+    console.log("Initialising bogus session")
+    console.log(bogusSession)
+                               // Logged in  : Logged out
+    pre = checkSession() ? bogusSession.user : { name: 'Logged out', uid: '0' };
+    sessionStatus = pre.uid != "0" ?    true : false;
+    // console.log("User logged in? "+sessionStatus);
   }
 
-  function resetSession() {
-    appUser = null;
-    init();
-    console.log("Reinit'd sess after logout, new sessionStatus: "+sessionStatus)
+  function checkSession() {
+    if(bogusSession != null)
+      return Object.keys(bogusSession).length !== 0;
+    else
+      return false;
   }
 
   init();
   var userPromise;
 
   return {
+    pre: function() { return pre; },
     sessionStatus: function() { return sessionStatus; },
 
     async: function(uid) {
@@ -36,9 +43,20 @@ app.factory('UserService', function($http) {
     logout: function() {
       $http.get("/logout").then(function (data, status, headers, config) {
         console.log("Logged out!");
-        resetSession();
-        console.log(sessionStatus);
+        bogusSession = null;
+        init();
+        if($state.current.name != 'signin') $state.go("index");
       })
+    },
+
+    checkAuth: function() {
+      if(this.sessionStatus() == false && $state.current.name != 'signin') {
+        console.log("Redirecting to index...");
+        $location.path('/');
+      } else {
+        console.log("Sending on to home...");
+        $location.path('/home');
+      }
     }
 
   };
