@@ -13,7 +13,6 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
   $sailsProvider.url = 'http://localhost:1337';
 
   $stateProvider
-
     .state('index', {
         url: '/',
         views: {
@@ -21,7 +20,6 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
             '@index': { templateUrl: 'partials/view-index' }
         }
     })
-
     .state('home', {
         url: '/home',
         views: {
@@ -29,7 +27,6 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
             '@home': { templateUrl: 'partials/view-home' }
         }
     })
-
     .state('dossier', {
         url: '/dossiers/:id',
         views: {
@@ -37,7 +34,6 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
             '@dossier': { templateUrl: 'partials/view-dossier' }
         }
     })
-
     .state('signin', {
         url: '/signin',
         views: {
@@ -49,6 +45,12 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
     $urlRouterProvider.otherwise('/');
 })
 
-app.run(function ($state) {
-   $state.transitionTo('index');
+app.run(function ($state, UserService) {
+  if(UserService.pre.name == "Logged out") {
+    console.log("Not logged in...")
+    $state.go('index');
+  } else {
+    console.log("Logged in...")
+    $state.go('home');
+  }
 })

@@ -32,19 +32,19 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  // Server-side HTML skeleton
-  '/': { view: 'default' },
+  // Server-side HTML skeleton - passes globals such as session uid
+  '/'                       : 'ViewController.render',
 
   // Render AngularJS jade partials
-  '/partials/:name': 'PartialController.render',
+  '/partials/:name'         : 'PartialController.render',
 
-  '/logout'                : 'AuthController.logout',
+  '/logout'                 : 'AuthController.logout',
 
-  '/auth/twitter'          : 'AuthController.twitter',
-  '/auth/twitter/callback' : 'AuthController.twitter/callback',
+  '/auth/twitter'           : 'AuthController.twitter',
+  '/auth/twitter/callback'  : 'AuthController.twitter/callback',
 
-  '/auth/dropbox'          : 'AuthController.dropbox',
-  '/auth/dropbox/callback' : 'AuthController.dropbox/callback'
+  '/auth/dropbox'           : 'AuthController.dropbox',
+  '/auth/dropbox/callback'  : 'AuthController.dropbox/callback'
 
   /***************************************************************************
   *                                                                          *

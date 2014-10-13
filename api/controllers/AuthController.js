@@ -23,15 +23,15 @@ var AuthController = {
   'twitter/callback': function (req, res, next) {
     console.log("Auth root: /auth/TWITTER/callback");
     passport.authenticate('twitter', function(err, user, info) {
+      if(user.isArray) user = user[0];
+
       console.log("Auth root: /auth/TWITTER/callback authenticate");
-      var user = user[0];
       console.log("Logging user in: "+user.name)
 
       req.logIn(user, function(err) {
         console.log("Auth root: /auth/TWITTER/callback login");
         if (err) return next(err);
-        // res.redirect('/#/home');
-        res.send(user);
+        res.redirect('/');
       });
     })(req, res, next);
   },
@@ -44,15 +44,15 @@ var AuthController = {
   'dropbox/callback': function (req, res, next) {
     console.log("Auth root: /auth/DROPBOX/callback");
     passport.authenticate('dropbox', function(err, user, info) {
+      if(user.isArray) user = user[0];
+
       console.log("Auth root: /auth/DROPBOX/callback authenticate");
-      var user = user[0];
       console.log("Logging user in: "+user.name)
 
       req.logIn(user, function(err) {
         console.log("Auth root: /auth/DROPBOX/callback login");
         if (err) return next(err);
-        // res.redirect('/#/home');
-        res.send(user);
+        res.redirect('/');
       });
     })(req, res, next);
   },

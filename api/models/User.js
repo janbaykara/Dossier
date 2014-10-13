@@ -4,12 +4,12 @@
 
 module.exports = {
   identity: 'User',
-  schema: true,
+  schema: false,
 
   attributes: {
-    name      : { type: 'string', unique: true },
-    email     : { type: 'email',  unique: true },
-    uid       : { type: 'string',  unique: true },
+    name      : { type: 'string' },
+    email     : { type: 'email' },
+    uid        : { type: 'string', unique: 'true' },
     provider  : { type: 'string' },
     dossiers  : { collection: 'Dossier', via: 'user' }
   }

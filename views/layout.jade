@@ -7,4 +7,8 @@ html(ng-app='Dossier')
     link(rel='stylesheet', type='text/css', href='styles/app.min.css')
     script(src='scripts/libs.min.js')
     script(src='scripts/app.min.js')
+    script.
+      // Injected from req.session.user
+      // ^^^ Replace this with some sort of session cookie parsing
+      appUser = !{session};
   body(role='application', ng-controller='AppController', ui-view='')
