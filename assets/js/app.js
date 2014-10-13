@@ -1,4 +1,4 @@
-var app = angular.module('Dossier', ['ui.router', 'ngSails']);
+var app = angular.module('Dossier', ['ui.router']);
 
 /* AngularJS calling order
 1. app.config()
@@ -8,9 +8,7 @@ var app = angular.module('Dossier', ['ui.router', 'ngSails']);
 5. directive's link functions (again if found)
 */
 
-app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
-
-  $sailsProvider.url = 'http://localhost:1337';
+app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('index', {
@@ -38,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
         url: '/signin',
         views: {
             '': { templateUrl: 'partials/template-single' },
-            '@signin': { templateUrl: 'partials/view-signin' }
+            '@signin': { templateUrl: 'partials/view-signin', controller: 'SigninController' }
         }
     })
 
@@ -46,11 +44,10 @@ app.config(function($stateProvider, $urlRouterProvider, $sailsProvider) {
 })
 
 app.run(function ($state, UserService) {
-  if(UserService.pre.name == "Logged out") {
-    console.log("Not logged in...")
+// # !!! Not working
+  if(UserService.sessionStatus == false) {
     $state.go('index');
   } else {
-    console.log("Logged in...")
     $state.go('home');
   }
 })

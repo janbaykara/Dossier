@@ -1,37 +1,21 @@
-app.controller('AppController', function($scope, $interval, $sails, $http, UserService) {
+app.controller('AppController', function($scope, $interval, $http, UserService) {
 
-  UserService.async('pre').then(function(user) {
-    $scope.user = user;
-    // console.log(user);
+  // Load user's details from API
+  UserService.async('pre').then(function(user) { $scope.user = user; });
+
+  // Auth services
+  $scope.logout = function() { UserService.logout(); }
+
+  $scope.$watch(UserService.sessionStatus, function() {
+      $scope.sessionStatus = UserService.sessionStatus();
   });
 
-  $scope.UserService = UserService;
-
   $interval(function() {
-    // console.log($scope.user);
-  }, 2000);
-
-    $http.get("/api/users")
-      .success(function (data) {
-        $scope.users = data;
-        // console.log($scope.users);
-      })
-      .error(function (data) {
-        alert("Houston, we've got a problem!");
-      });
-
-    $sails.on("message", function (message) {
-      // console.log(message);
-      if (message.verb === "create") {
-        $scope.users.push(message.data);
-        // console.log($scope.users);
-      }
-    });
-
+    $scope.sessionStatus = UserService.sessionStatus();
+  },500)
 });
 
 app.controller('SigninController', function($scope, UserService) {
-
+  console.log("Signing in...")
   UserService.logout();
-
 });
