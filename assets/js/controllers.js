@@ -9,6 +9,6 @@ app.controller('AppController', function($scope, $http, UserService) {
 });
 
 app.controller('SigninController', function($scope, UserService) {
-  console.log("Signing in...");
+  // console.log("Signing in...");
   UserService.logout();
 });

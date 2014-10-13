@@ -5,8 +5,8 @@ app.factory('UserService', function($http, $state, $location) {
   var sessionStatus;
 
   function init() {
-    console.log("Initialising bogus session")
-    console.log(bogusSession)
+    // console.log("Initialising bogus session")
+    // console.log(bogusSession)
                                // Logged in  : Logged out
     pre = checkSession() ? bogusSession.user : { name: 'Logged out', uid: '0' };
     sessionStatus = pre.uid != "0" ?    true : false;
@@ -42,7 +42,7 @@ app.factory('UserService', function($http, $state, $location) {
 
     logout: function() {
       $http.get("/logout").then(function (data, status, headers, config) {
-        console.log("Logged out!");
+        // console.log("Logged out!");
         bogusSession = null;
         init();
         if($state.current.name != 'signin') $state.go("index");
@@ -51,10 +51,10 @@ app.factory('UserService', function($http, $state, $location) {
 
     checkAuth: function() {
       if(this.sessionStatus() == false && $state.current.name != 'signin') {
-        console.log("Redirecting to index...");
+        // console.log("Redirecting to index...");
         $location.path('/');
       } else {
-        console.log("Sending on to home...");
+        // console.log("Sending on to home...");
         $location.path('/home');
       }
     }
