@@ -22,12 +22,12 @@ var dirs = {
               'assets/img/**/*.gif',
               'assets/img/**/*.png'],
     svg:     ['assets/img/**/*.svg'],
-    js:      ['assets/js/*.js'],
+    js:      ['assets/js/*.js'], // Specifically top-level only
     jslibs:  jsLibs,
-    data:    ['assets/data/*.json'],
-    sass:    ['assets/sass/*.scss'],
-    fonts:   ['assets/fonts/*'],
-    html:    ['assets/partials/*']
+    data:    ['assets/data/**/*.json'],
+    sass:    ['assets/sass/**/*.scss'],
+    fonts:   ['assets/fonts/**/*'],
+    html:    ['assets/partials/**/*']
   },
   prod: {
     images:   '.tmp/public/images',
@@ -46,7 +46,7 @@ gulp.task('install', function () {
 // Styles
 
   gulp.task('styles', function () {
-    gulp.src(dirs.dev.sass)
+    return gulp.src(dirs.dev.sass)
     .pipe(plugins.sass({
         errLogToConsole: true
     }))
@@ -67,7 +67,7 @@ gulp.task('install', function () {
   });
 
   gulp.task('fonts', function() {
-    gulp.src(dirs.dev.fonts)
+    return gulp.src(dirs.dev.fonts)
     .pipe(gulp.dest(dirs.prod.styles));
   });
 
@@ -76,7 +76,7 @@ gulp.task('install', function () {
 
   // Vendor JS
   gulp.task('libs', function() {
-    gulp.src(mainBowerFiles(/* options */), { base: 'vendor' })
+    return gulp.src(dirs.dev.jslibs)
     .pipe(plugins.concat('libs.min.js'))
     .pipe(plugins.size({showFiles: true}))
     .pipe(plugins.uglify({mangle: false}))
@@ -86,7 +86,7 @@ gulp.task('install', function () {
 
   // Project JS
   gulp.task('scripts', function() {
-    gulp.src(dirs.dev.js)
+    return gulp.src(dirs.dev.js)
     .pipe(plugins.concat('app.min.js'))
     .pipe(plugins.size({showFiles: true}))
     .pipe(plugins.uglify({mangle: false}))
@@ -96,13 +96,13 @@ gulp.task('install', function () {
 
   // Datafiles
   gulp.task('data', function() {
-    gulp.src(dirs.dev.data)
+    return gulp.src(dirs.dev.data)
     .pipe(gulp.dest(dirs.prod.scripts));
   });
 
   // Datafiles
   gulp.task('views', function() {
-    gulp.src(dirs.dev.html)
+    return gulp.src(dirs.dev.html)
     .pipe(gulp.dest(dirs.prod.views));
   });
 
@@ -110,13 +110,13 @@ gulp.task('install', function () {
 // Images
 
     gulp.task('rasters', function() {
-      gulp.src(dirs.dev.img)
+      return gulp.src(dirs.dev.img)
       .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
       .pipe(gulp.dest(dirs.prod.images));
     });
 
     gulp.task('vectors', function() {
-      gulp.src(dirs.dev.svg)
+      return gulp.src(dirs.dev.svg)
       .pipe(plugins.svgmin())
       .pipe(plugins.replace(/_[0-9]+_/g, '')) // Illustrator SVGs; strip appended strings from id names
       .pipe(gulp.dest(dirs.prod.images));
@@ -153,7 +153,8 @@ gulp.task('watch', function() {
   gulp.watch(dirs.prod.views, ['bs-reload']);
 });
 
-gulp.task('build', ['rasters', 'vectors', 'styles', 'fonts', 'scripts', 'libs', 'views', 'data']);
 gulp.task('start', ['bs-reload']);
-gulp.task('init', ['install', 'build']);
+gulp.task('assets', ['rasters', 'vectors', 'fonts']);
+gulp.task('build', ['styles', 'scripts', 'libs', 'views', 'data']);
+gulp.task('init', ['install', 'build', 'assets', 'watch', 'start']);
 gulp.task('default', ['build', 'watch', 'start']);

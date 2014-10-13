@@ -10,5 +10,5 @@ html(ng-app='Dossier')
     script.
       // Injected from req.session.user
       // ^^^ Replace this with some sort of session cookie parsing
-      appUser = !{session};
+      injectedSession = !{session};
   body(role='application', ng-controller='AppController', ui-view='')
