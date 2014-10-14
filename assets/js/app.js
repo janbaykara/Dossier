@@ -35,9 +35,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 })
 
-app.run(function ($rootScope, $location, $state, UserService) {
-// # !!! Not working
+app.run(function ($rootScope, $location, $state, SessionService) {
   $rootScope.$on('$stateChangeStart', function() {
-    UserService.checkAuth();
+    SessionService.checkAuth();
   });
 })

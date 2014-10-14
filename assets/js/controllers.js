@@ -1,14 +1,13 @@
-app.controller('AppController', function($scope, $http, UserService) {
+app.controller('AppController', function($scope, $http, APIService, SessionService) {
   // Auth services
-  $scope.sessionStatus = function() { return UserService.sessionStatus(); }
-  $scope.logout = function() { UserService.logout(); }
+  $scope.sessionStatus = function() { return SessionService.status(); }
+  $scope.logout = function() { SessionService.logout(); }
 
   // Load user's details from API
-  $scope.user = UserService.pre(); // preload name & uid from session injection
-  UserService.async('pre').then(function(user) { $scope.user = user; });
+  $scope.user = SessionService.pre(); // preload name & uid from session injection
 });
 
-app.controller('SigninController', function($scope, UserService) {
+app.controller('SigninController', function($scope, SessionService) {
   // console.log("Signing in...");
-  UserService.logout();
+  SessionService.logout();
 });
