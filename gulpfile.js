@@ -11,7 +11,7 @@ var plugins = gulpLoadPlugins();
 // Get js libs from assets/js/dependencies and main bower_component files
 var localLibs = ['assets/js/dependencies/*.js'];
 var bowerLibs = mainBowerFiles().map(function(x){ return __dirname+"/" ? x.replace(__dirname+"/","") : x });
-var jsLibs = localLibs.concat(bowerLibs);
+var libs = localLibs.concat(bowerLibs);
 
 // Paths
 var dirs = {
@@ -23,7 +23,7 @@ var dirs = {
               'assets/img/**/*.png'],
     svg:     ['assets/img/**/*.svg'],
     js:      ['assets/js/*.js'], // Specifically top-level only
-    jslibs:  jsLibs,
+    libs:    libs,
     data:    ['assets/data/**/*.json'],
     sass:    ['assets/sass/**/*.scss'],
     fonts:   ['assets/fonts/**/*'],
@@ -45,7 +45,7 @@ gulp.task('install', function () {
 // ----------------------------------------------------------------
 // Styles
 
-  gulp.task('styles', function () {
+  gulp.task('css', function () {
     return gulp.src(dirs.dev.sass)
     .pipe(plugins.sass({
         errLogToConsole: true
@@ -76,7 +76,7 @@ gulp.task('install', function () {
 
   // Vendor JS
   gulp.task('libs', function() {
-    return gulp.src(dirs.dev.jslibs)
+    return gulp.src(dirs.dev.libs)
     .pipe(plugins.concat('libs.min.js'))
     .pipe(plugins.size({showFiles: true}))
     .pipe(plugins.uglify({mangle: false}))
@@ -85,7 +85,7 @@ gulp.task('install', function () {
   });
 
   // Project JS
-  gulp.task('scripts', function() {
+  gulp.task('js', function() {
     return gulp.src(dirs.dev.js)
     .pipe(plugins.concat('app.min.js'))
     .pipe(plugins.size({showFiles: true}))
@@ -101,7 +101,7 @@ gulp.task('install', function () {
   });
 
   // Datafiles
-  gulp.task('views', function() {
+  gulp.task('html', function() {
     return gulp.src(dirs.dev.html)
     .pipe(gulp.dest(dirs.prod.views));
   });
@@ -109,13 +109,13 @@ gulp.task('install', function () {
 // ----------------------------------------------------------------
 // Images
 
-    gulp.task('rasters', function() {
+    gulp.task('img', function() {
       return gulp.src(dirs.dev.img)
       .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
       .pipe(gulp.dest(dirs.prod.images));
     });
 
-    gulp.task('vectors', function() {
+    gulp.task('svg', function() {
       return gulp.src(dirs.dev.svg)
       .pipe(plugins.svgmin())
       .pipe(plugins.replace(/_[0-9]+_/g, '')) // Illustrator SVGs; strip appended strings from id names
@@ -138,23 +138,24 @@ gulp.task('install', function () {
 // Tasks
 
 gulp.task('watch', function() {
-  gulp.watch(dirs.dev.js,     ['scripts']);
+  gulp.watch(dirs.dev.js,     ['js']);
   gulp.watch(dirs.dev.libs,   ['libs']);
+  gulp.watch(dirs.dev.config, ['libs']);
   gulp.watch(dirs.dev.data,   ['data']);
   //
-  gulp.watch(dirs.dev.sass,   ['styles']);
+  gulp.watch(dirs.dev.sass,   ['css']);
   gulp.watch(dirs.prod.styles,['bs-reload']);
   //
   gulp.watch(dirs.dev.fonts,  ['fonts']);
-  gulp.watch(dirs.dev.img,    ['rasters']);
-  gulp.watch(dirs.dev.svg,    ['vectors']);
+  gulp.watch(dirs.dev.img,    ['img']);
+  gulp.watch(dirs.dev.svg,    ['svg']);
   //
-  gulp.watch(dirs.dev.html,   ['views']);
+  gulp.watch(dirs.dev.html,   ['html']);
   gulp.watch(dirs.prod.views, ['bs-reload']);
 });
 
 gulp.task('start', ['bs-reload']);
-gulp.task('assets', ['rasters', 'vectors', 'fonts']);
-gulp.task('build', ['styles', 'scripts', 'libs', 'views', 'data']);
+gulp.task('assets', ['img', 'svg', 'fonts']);
+gulp.task('build', ['css', 'js', 'libs', 'html', 'data']);
 gulp.task('init', ['install', 'build', 'assets', 'watch', 'start']);
 gulp.task('default', ['build', 'watch', 'start']);
