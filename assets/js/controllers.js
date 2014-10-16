@@ -1,4 +1,4 @@
-app.controller('AppController', function($scope, $http, APIService, SessionService) {
+app.controller('AppController', function($scope, $http, SessionService) {
   // Auth services
   $scope.sessionStatus = function() { return SessionService.status(); }
   $scope.logout = function() { SessionService.logout(); }
