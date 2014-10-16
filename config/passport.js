@@ -17,13 +17,12 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
+  // @@@ ??? Why does passport continually query database to deserialise in single pageload?
   console.log("Deserializing user: "+user.name)
   console.log(user)
-  User.find({uid: user.uid}).exec(function (err, user) {
-    var user = user[0];
+  User.find({uid: user.uid}).exec(function (err, result) {
+    var user = result[0];
     if(err) {
-      // # !!!
-      // Error going on with null @user var passed from verifyHandler, crashes Passport
       console.log("Deserializing - CANNOT find user...")
       console.log(err);
       done(err, null);
@@ -37,14 +36,12 @@ passport.deserializeUser(function(user, done) {
 var verifyHandler = function (token, tokenSecret, profile, done) {
   console.log("Verify Handling");
   console.log("Finding users matching uid: "+profile.id)
-  // # ??? Refactor all below this, move the data handling to AuthController and out of config
+  // @@@ ??? Refactor , move data handling to AuthController and out of config?
   User.find({uid: profile.id}).exec(function (err, user) {
     console.log("Results of query...");
     console.log(err,user);
     var user = user[0];
     if(err) {
-      console.log("Roops, something went wrong finding user to auth")
-      console.log(err);
       createNewUser(profile);
     } else if (user) {
       console.log("I have asserted that user exists. Here he is:")
@@ -52,43 +49,40 @@ var verifyHandler = function (token, tokenSecret, profile, done) {
       console.log("Logging user in: "+user.name);
       return done(null, user);
     } else {
-      console.log("User does not exist...");
+      console.log("User does not currently exist...");
       createNewUser(profile);
-    }
-
-    function createNewUser(profile) {
-      console.log("Creating new user: "+profile.displayName);
-
-      process.nextTick(function () {
-        var thisProfile = {
-          "uid": profile.id,
-          "name": profile.displayName,
-          "provider": profile.provider
-        };
-        console.log("Creating with:")
-        console.log(thisProfile);
-        User.create(thisProfile).exec(function (err, user) {
-          // # !!! EMPTY USER (OCCASSIONAL, CREATED OBJ)
-          // User.create sometimes blanks out, passes empty vars to auth
-          // May be to do with unique schema, duplicate names
-          // However, database is still populated, so probably not...
-          console.log("User creation finished.")
-          console.log(err,user);
-
-          if(err || user == null || user.name == undefined) {
-            console.log("User probably created, but I ... uh... forgot where I put it...");
-            console.log(err);
-            user = thisProfile; // # ^^^ Hacky fix to User.create() returning null user...
-          }
-
-          console.log("User created:"+user.name);
-          console.log(user);
-          return done(null, user);
-        });
-      });
     }
   });
 };
+
+function createNewUser(profile) {
+  console.log("Creating new user: "+profile.displayName);
+
+  var thisProfile = {
+    "uid": profile.id,
+    "name": profile.displayName,
+    "provider": profile.provider
+  };
+
+  User.create(thisProfile).exec(function (err, user) {
+    // @@@ !!! EMPTY USER (OCCASSIONAL, CREATED OBJ)
+    // User.create sometimes blanks out, passes empty vars to auth
+    // May be to do with unique schema, duplicate names
+    // However, database is still populated, so probably not...
+    console.log("User creation finished.")
+    console.log(err,user);
+
+    if(err || user == null || user.name == undefined) {
+      console.log("User probably created, but I ... uh... forgot where I put it...");
+      console.log(err);
+      user = thisProfile; // @@@ ^^^ Hacky fix to User.create() returning null user...
+    }
+
+    console.log("User created:"+user.name);
+    console.log(user);
+    return done(null, user);
+  });
+}
 
 module.exports = {
   express: {

@@ -8,7 +8,6 @@
 var passport = require('passport');
 
 var AuthController = {
-
   logout: function (req, res) {
     console.log("/logout - Logging out")
     req.logout();
@@ -44,7 +43,6 @@ var AuthController = {
   'dropbox/callback': function (req, res, next) {
     console.log("Auth root: /auth/DROPBOX/callback");
     passport.authenticate('dropbox', function(err, user, info) {
-      if(user.isArray) user = user[0];
 
       console.log("Auth root: /auth/DROPBOX/callback authenticate");
       console.log("Logging user in: "+user.name)
