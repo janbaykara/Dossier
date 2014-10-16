@@ -3,11 +3,16 @@
   "dependencies": {
     "angular": "~1.2.x",
     "angular-ui-router": "~0.2.11",
-    "angular-sails": "~1.0.4"
+    "angular-sails": "~1.0.4",
+    "ng-tags-input": "2.1.1",
+    "angular-resource": "~1.3.0"
   },
   "overrides": {
-    "angular-ui-router": {
-      "main": "release/angular-ui-router.js"
-    }
+    "angular-ui-router": { "main": "release/angular-ui-router.js" },
+    "ng-tags-input": { "main": "ng-tags-input.js" },
+    "angular-resource": { "main": "angular-resource.js" }
+  },
+  "resolutions": {
+    "angular": "1.3.0"
   }
 }
