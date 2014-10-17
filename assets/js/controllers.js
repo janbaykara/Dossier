@@ -3,12 +3,14 @@ app.controller('SigninController', function($scope, SessionService) {
   SessionService.logout();
 });
 
-app.controller('DossierController', function($scope, Dossier, SessionService, User) {
+app.controller('DossierController', function($scope, Dossier, SessionService, User, Category) {
   // Get User's dossiers
   $scope.user = User.query({uid: SessionService.user().uid}, function(usr) {
     $scope.user = $scope.user[0];
     console.log($scope.user);
   });
+
+  $scope.categories = Category.query();
 
   $scope.create = function() {
     $scope.newDossier.user = $scope.user.uid

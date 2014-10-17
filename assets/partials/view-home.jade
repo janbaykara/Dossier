@@ -7,7 +7,7 @@
     form(name='create-dossier', ng-keyup="$event.keyCode == 13 && create()")
       input(required, ng-model='newDossier.name', type='text', name='name', placeholder='Create a new dossier')
       textarea(ng-model='newDossier.description')
-      //- CATEGORY: select(ng-model="newDossier.category", name="category", ng-options="cat.name group by cat.parent for cat in categories")
+      select(ng-model="newDossier.category", name="category", ng-options="cat.name group by cat.parent.name for cat in categories")
       tags-input(class='js-tags-input', ng-model="newDossier.tags", placeholder="Tag this Dossier", replace-spaces-with-dashes="false")
     section
       h4 Your dossiers
