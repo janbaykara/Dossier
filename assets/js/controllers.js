@@ -7,21 +7,24 @@ app.controller('DossierController', function($scope, Dossier, SessionService, Us
   // Get User's dossiers
   $scope.user = User.query({uid: SessionService.user().uid}, function(usr) {
     $scope.user = $scope.user[0];
-    $scope.dossiers = Dossier.query({user: $scope.user.id});
+    console.log($scope.user);
   });
 
   $scope.create = function() {
-    $scope.newDossier.user = $scope.user.id // @@@ +++ Relate this to user model
+    $scope.newDossier.user = $scope.user.uid
     $scope.dossier = new Dossier($scope.newDossier);
     Dossier.save($scope.dossier, function(dos) {
-      $scope.dossiers[$scope.dossiers.length] = dos;
+      $scope.user.dossiers[$scope.user.dossiers.length] = dos;
     });
   }
 
   $scope.delete = function(dossier) {
     Dossier.delete({id: dossier.id}, function() {
-      _.remove($scope.dossiers, function(dos) { return dos.id == dossier.id; });
-    })
+      _.remove($scope.user.dossiers, function(dos) { return dos.id == dossier.id; });
+    });
+  }
+});
+
 app.controller('CategoryController', function($scope, Category) {
   $scope.categories = Category.query();
 

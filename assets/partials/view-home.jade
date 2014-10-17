@@ -12,7 +12,7 @@
     section
       h4 Your dossiers
       ul
-        li(ng-repeat='dossier in dossiers')
+        li(ng-repeat='dossier in user.dossiers')
           h3(ng-bind='dossier.name')
           p(ng-bind='dossier.description')
           button(ng-click='edit(dossier)') Edit
