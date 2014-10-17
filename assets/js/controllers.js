@@ -4,13 +4,17 @@ app.controller('SigninController', function($scope, SessionService) {
 });
 
 app.controller('DossierController', function($scope, Dossier, SessionService, User, Category) {
+  $scope.newDossier = {};
+
   // Get User's dossiers
   $scope.user = User.query({uid: SessionService.user().uid}, function(usr) {
     $scope.user = $scope.user[0];
     console.log($scope.user);
   });
 
-  $scope.categories = Category.query();
+  $scope.categories = Category.query({}, function() {
+    $scope.newDossier.category = _.find($scope.categories, function(cat) { return cat.id == Category.root.id; });
+  });
 
   $scope.create = function() {
     $scope.newDossier.user = $scope.user.uid
@@ -28,7 +32,19 @@ app.controller('DossierController', function($scope, Dossier, SessionService, Us
 });
 
 app.controller('CategoryController', function($scope, Category) {
-  $scope.categories = Category.query();
+  $scope.newCategory = {};
+
+  $scope.categories = Category.query({}, function() { // @@@ !!! Fix <select> not updating on category add/remove
+    $scope.newCategory.parent = _.find($scope.categories, function(cat) { return cat.id == Category.root.id; });
+  });
+
+  console.log(Category.root.id);
+  $scope.topLevelCats = Category.query({parent: Category.root.id});
+  $scope.assignableCats = _.clone($scope.topLevelCats);
+  $scope.assignableCats[$scope.assignableCats.length] = Category.query({id: Category.root.id}, function(root) {
+    $scope.assignableCats[$scope.assignableCats.length] = root;
+    console.log($scope.assignableCats)
+  });
 
   $scope.create = function() {
     $scope.category = new Category($scope.newCategory);
@@ -43,10 +59,5 @@ app.controller('CategoryController', function($scope, Category) {
     });
   }
 
-  $scope.validCategory = function() {
-    if(newCategory.name == null)
-      return false;
-    else
-      return true;
-  }
+  $scope.isChild = function(cat) { return Category.isChild(cat); }
 });

@@ -13,10 +13,25 @@ app.factory('Dossier', function($resource) {
 });
 
 app.factory('Category', function($resource) {
-  return $resource('/api/categories/:id',
+  Category = $resource('/api/categories/:id',
     { id: '@resource_id' }, {
       'search': { method: 'GET', isArray: true }
   });
+
+  Category.root = {
+    id: "544175a4029f9a07bcdc0ce2"
+  }
+
+  Category.isChild = function(cat) {
+    if(cat.parent) {
+      if(cat.parent.id != this.root.id)
+        return true;
+      else
+        return false;
+    }
+  }
+
+  return Category;
 });
 
 app.factory('SessionService', function($http, $state, $location, User) {
