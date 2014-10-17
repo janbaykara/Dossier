@@ -50,12 +50,12 @@ var verifyHandler = function (token, tokenSecret, profile, done) {
       return done(null, user);
     } else {
       console.log("User does not currently exist...");
-      createNewUser(profile);
+      createNewUser(profile, done);
     }
   });
 };
 
-function createNewUser(profile) {
+function createNewUser(profile, done) {
   console.log("Creating new user: "+profile.displayName);
 
   var thisProfile = {
