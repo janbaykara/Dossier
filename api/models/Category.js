@@ -11,8 +11,6 @@ module.exports = {
     color: 'string',
     color2: 'string',
     font: 'string',
-    api_source: 'string',
-    api_url: 'string',
     parent: { model: 'category' },
     children: {
       collection: 'category',
@@ -22,6 +20,7 @@ module.exports = {
       collection: 'dossier',
       via: 'category'
     }
+  , api: { model: 'API' }
   }
 };
 
