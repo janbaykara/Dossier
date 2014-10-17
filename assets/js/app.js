@@ -10,6 +10,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
             '@index': { templateUrl: 'partials/view-index' }
         }
     })
+    .state('signin', {
+        url: '/signin',
+        views: {
+            '': { templateUrl: 'partials/template-single' },
+            '@signin': { templateUrl: 'partials/view-signin', controller: 'SigninController' }
+        }
+    })
     .state('home', {
         url: '/home',
         views: {
@@ -17,18 +24,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             '@home': { templateUrl: 'partials/view-home' }
         }
     })
+    .state('categories', {
+        url: '/categories',
+        views: {
+            '': { templateUrl: 'partials/template-content' },
+            '@categories': { templateUrl: 'partials/view-categories' }
+        }
+    })
     .state('dossier', {
         url: '/dossiers/:id',
         views: {
             '': { templateUrl: 'partials/template-content' },
             '@dossier': { templateUrl: 'partials/view-dossier' }
-        }
-    })
-    .state('signin', {
-        url: '/signin',
-        views: {
-            '': { templateUrl: 'partials/template-single' },
-            '@signin': { templateUrl: 'partials/view-signin', controller: 'SigninController' }
         }
     })
 

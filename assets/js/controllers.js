@@ -22,5 +22,26 @@ app.controller('DossierController', function($scope, Dossier, SessionService, Us
     Dossier.delete({id: dossier.id}, function() {
       _.remove($scope.dossiers, function(dos) { return dos.id == dossier.id; });
     })
+app.controller('CategoryController', function($scope, Category) {
+  $scope.categories = Category.query();
+
+  $scope.create = function() {
+    $scope.category = new Category($scope.newCategory);
+    Category.save($scope.category, function(cat) {
+      $scope.categories[$scope.categories.length] = cat;
+    });
   }
-})
+
+  $scope.delete = function(category) {
+    Category.delete({id: category.id}, function() {
+      _.remove($scope.categories, function(cat) { return cat.id == category.id; });
+    });
+  }
+
+  $scope.validCategory = function() {
+    if(newCategory.name == null)
+      return false;
+    else
+      return true;
+  }
+});

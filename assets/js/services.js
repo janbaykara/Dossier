@@ -12,6 +12,13 @@ app.factory('Dossier', function($resource) {
   });
 });
 
+app.factory('Category', function($resource) {
+  return $resource('/api/categories/:id',
+    { id: '@resource_id' }, {
+      'search': { method: 'GET', isArray: true }
+  });
+});
+
 app.factory('SessionService', function($http, $state, $location, User) {
   var bogusSession = injectedSession, user, userData, status;
 
