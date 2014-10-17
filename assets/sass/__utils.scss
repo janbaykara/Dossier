@@ -7,6 +7,7 @@
 
 $inputs: #{"input[type='text'], input[type='password'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='month'], input[type='week'], input[type='email'], input[type='number'], input[type='search'], input[type='tel'], input[type='time'], input[type='url'], input[type='color'], textarea"};
 $headings: #{'h1,h2,h3,h4,h5'};
+$pseudo-elements: #{':after, :before'};
 
 // -------
 //  Constants
@@ -61,7 +62,7 @@ $pi: 3.14159265359;
 }
 
 @mixin no-webkit {
-    -webkit-appearance: none;
+    appearance: none;
     border: none;
     background: none;
     color: grey;

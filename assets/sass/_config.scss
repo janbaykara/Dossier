@@ -2,7 +2,7 @@
 // Colors
 
 // Defined colors
-$brand-color: 		  	$green;
+$brand-color: 		  	$blue;
 $complementary-color: complement($brand-color);
 $secondary-color: 	  adjust_hue($brand-color, 120);
 $tertiary-color: 	  	adjust_hue($brand-color, -120);
@@ -10,7 +10,7 @@ $tertiary-color: 	  	adjust_hue($brand-color, -120);
 $text-color:         	#333;
 $background-color:   	#fff;
 
-$link-color:          $secondary-color;
+$link-color:          $complementary-color;
 $link-color-hover:    lighten($link-color,10%);
 $link-color-active:   lighten($link-color,20%);
 $link-color-visited:  $link-color;
