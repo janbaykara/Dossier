@@ -3,11 +3,11 @@
 */
 
 module.exports = {
-    name:         { type: 'string', required: true }
-  identity: 'Dossier'
+  name:         { type: 'string', required: true }
+, identity: 'Dossier'
 , schema: true
-,  attributes: {
-  , description:  'string'
+, attributes: {
+    description:  'string'
   , category:     { model: 'Category' }
   , user:         { model: 'User', required: true }
   , tags:         'array' // +++ Relate this to a TAG db model
