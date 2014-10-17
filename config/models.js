@@ -10,23 +10,15 @@
  */
 
 module.exports.models = {
-
   /***************************************************************************
-  *                                                                          *
-  * Your app's default connection. i.e. the name of one of your app's        *
   * connections (see `config/connections.js`)                                *
-  *                                                                          *
   ***************************************************************************/
   connection: 'localMongoServer',
 
   /***************************************************************************
-  *                                                                          *
-  * How and whether Sails will attempt to automatically rebuild the          *
-  * tables/collections/etc. in your schema.                                  *
-  *                                                                          *
-  * See http://sailsjs.org/#/documentation/concepts/ORM/model-settings.html  *
-  *                                                                          *
+  * safe  : never auto-migrate my database(s). I will do it myself, by hand.
+  * alter : auto-migrate columns/fields, but attempt to keep my existing data (experimental)
+  * drop  : wipe/drop ALL my data and rebuild models every time I lift Sails
   ***************************************************************************/
-  migrate: 'drop'
-
+  migrate: 'alter'
 };
