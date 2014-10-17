@@ -20,7 +20,7 @@ app.factory('Category', function($resource) {
 });
 
 app.factory('SessionService', function($http, $state, $location, User) {
-  var bogusSession = injectedSession, user, userData, status;
+  var bogusSession = injectedSession, whitelist = [], user, userData, status;
 
   function init() {            // Logged in  : Logged out
     user = checkSession() ? bogusSession.user : { name: 'Logged out', uid: '0' };
@@ -29,7 +29,6 @@ app.factory('SessionService', function($http, $state, $location, User) {
     // Load user from db.
     if(status) {
       user = User.query({uid: user.uid}, function(result) {
-        console.log(result[0]);
         user = result[0];
       });
     }
@@ -43,8 +42,9 @@ app.factory('SessionService', function($http, $state, $location, User) {
   init();
 
   return {
+    whitelist: function(whitelisted) { whitelist = whitelisted; },
     userData: function() { return userData; },
-    user: function() { return user; console.log(user); },
+    user: function() { return user; },
     status: function() { return status; },
     logout: function() {
       $http.get("/logout").then(function (data, status, headers, config) {
@@ -52,11 +52,14 @@ app.factory('SessionService', function($http, $state, $location, User) {
         if($state.current.name != 'signin') $state.go("index");
       })
     },
-    checkAuth: function() {
-      if(this.status() == false && $state.current.name != 'signin')
-        $location.path('/');
-      else
-        $location.path('/home');
+    checkAuth: function(to,from) {
+      if(this.status() == false) {         console.log("GATEKEEPER: Hello, visitor.");
+        if(whitelist.indexOf(to) == -1)    console.log("--GATEKEEPER: Snooping where you shouldn't? To / with you.")
+          $location.path('/');
+      } else {                             console.log("GATEKEEPER: You're logged in.");
+        if(!from)                          console.log("--GATEKEEPER: But wandering aimlessly, let's take you /#/home");
+          $location.path('/home');
+      }
     }
   };
 });

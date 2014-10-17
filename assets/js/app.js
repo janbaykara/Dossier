@@ -43,8 +43,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
 
 app.run(function ($rootScope, $location, $state, SessionService) {
-  $rootScope.$on('$stateChangeStart', function() {
-    SessionService.checkAuth();
+  SessionService.whitelist([ // Publicly viewable states
+    'index'
+  , 'signin'
+  , 'about'
+  ]);
+
+  SessionService.checkAuth(null,null);
+
+  $rootScope.$on('$stateChangeStart', function(event, to, toParams, from, fromParams) {
+    SessionService.checkAuth($state.current.name,from);
   });
 })
 
