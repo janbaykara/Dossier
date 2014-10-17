@@ -40,3 +40,12 @@ app.run(function ($rootScope, $location, $state, SessionService) {
     SessionService.checkAuth();
   });
 })
+
+app.controller('AppController', function($scope, $http, SessionService) {
+  // Auth services
+  $scope.sessionStatus = function() { return SessionService.status(); }
+  $scope.logout = function() { SessionService.logout(); }
+
+  // Load user's details from API
+  $scope.user = SessionService.user(); // preload name & uid from session injection
+});
