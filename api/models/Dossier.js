@@ -3,10 +3,10 @@
 */
 
 module.exports = {
-  identity: 'Dossier',
-  schema: true,
-  attributes: {
     name:         { type: 'string', required: true }
+  identity: 'Dossier'
+, schema: true
+,  attributes: {
   , description:  'string'
   , category:     { model: 'Category' }
   , user:         { model: 'User', required: true }

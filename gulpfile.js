@@ -11,7 +11,7 @@ var plugins = gulpLoadPlugins();
 // Get js libs from assets/js/dependencies and main bower_component files
 var localLibs = ['assets/js/dependencies/*.js'];
 var bowerLibs = mainBowerFiles().map(function(x){ return __dirname+"/" ? x.replace(__dirname+"/","") : x });
-var libs = localLibs.concat(bowerLibs);
+var libs = bowerLibs.concat(localLibs);
 
 // Paths
 var dirs = {
