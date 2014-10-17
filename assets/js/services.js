@@ -57,8 +57,9 @@ app.factory('SessionService', function($http, $state, $location, User) {
         if(whitelist.indexOf(to) == -1)    console.log("--GATEKEEPER: Snooping where you shouldn't? To / with you.")
           $location.path('/');
       } else {                             console.log("GATEKEEPER: You're logged in.");
-        if(!from)                          console.log("--GATEKEEPER: But wandering aimlessly, let's take you /#/home");
-          $location.path('/home');
+        if(!from && !window.location.hash.substr(2)) {
+          $location.path('/home');         console.log("--GATEKEEPER: But wandering aimlessly, let's take you /#/home");
+        }
       }
     }
   };
