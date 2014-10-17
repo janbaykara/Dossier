@@ -1,13 +1,25 @@
+app.factory('User', function($resource) {
+  return $resource('/api/users/:id',
+    { id: '@resource_id' }, {
+      'search': { method: 'GET', isArray: true }
+  });
+});
 
 
-app.factory('SessionService', function($http, $state, $location) {
-  var bogusSession = injectedSession
-    , pre
-    , status;
+app.factory('SessionService', function($http, $state, $location, User) {
+  var bogusSession = injectedSession, user, userData, status;
 
   function init() {            // Logged in  : Logged out
-    pre = checkSession() ? bogusSession.user : { name: 'Logged out', uid: '0' };
-              status = pre.uid != "0" ? true : false;
+    user = checkSession() ? bogusSession.user : { name: 'Logged out', uid: '0' };
+              status = user.uid != "0" ? true : false;
+
+    // Load user from db.
+    if(status) {
+      user = User.query({uid: user.uid}, function(result) {
+        console.log(result[0]);
+        user = result[0];
+      });
+    }
   }
 
   function checkSession() {
@@ -18,7 +30,8 @@ app.factory('SessionService', function($http, $state, $location) {
   init();
 
   return {
-    pre: function() { return pre; },
+    userData: function() { return userData; },
+    user: function() { return user; console.log(user); },
     status: function() { return status; },
     logout: function() {
       $http.get("/logout").then(function (data, status, headers, config) {
