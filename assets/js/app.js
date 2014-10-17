@@ -1,4 +1,4 @@
-var app = angular.module('Dossier', ['ui.router', 'ngTagsInput', 'ngResource']);
+var app = angular.module('Dossier.io', ['ui.router', 'ngTagsInput', 'ngResource']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
