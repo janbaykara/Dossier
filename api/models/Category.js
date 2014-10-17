@@ -3,25 +3,16 @@
 */
 
 module.exports = {
-  identity: 'category',
-  schema: false,
-  attributes: {
-    name: { type: 'string', required: true },
-    description: 'string',
-    color: 'string',
-    color2: 'string',
-    font: 'string',
-    api_source: 'string',
-    api_url: 'string',
-    parent: { model: 'category' },
-    children: {
-      collection: 'category',
-      via: 'parent'
-    },
-    dossiers: {
-      collection: 'dossier',
-      via: 'category'
-    }
+  identity: 'Category'
+, schema: true
+, attributes: {
+    slug:         { type: 'string', unique: true }
+  , name:         { type: 'string', unique: true }
+  , description:  { type: 'string', defaultsTo: "I demand you look at ird."}
+  , api_provider: { type: 'string', defaultsTo: "spotify"}
+  , api_url:      { type: 'string', defaultsTo: "http://ws.spotify.com/search/1/track.json?q=track%3a"}
+  , parent:       { model: 'Category' }
+  , children:     { collection: 'Category', via: 'parent' }
+  , dossiers:     { collection: 'Dossier', via: 'category' }
   }
-};
-
+}

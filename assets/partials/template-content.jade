@@ -2,7 +2,9 @@ header.app__header.bg-brand(role='banner')
   .app__content
     span.em4.bold.black.app__header__title Dossier
     nav.h-li.app__nav(role='menubar')
-      a.invisible(ng-show='sessionStatus()' ng-click='logout()') Logout
+      a(ng-show='sessionStatus()' ng-click='logout()') Logout
+      a(ui-sref='home') Home
+      a(ui-sref='categories') Categories
 .app__body(ui-view='')
 footer.app__footer
   .app__content

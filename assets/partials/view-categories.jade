@@ -1,0 +1,20 @@
+.app__content
+
+  section(ng-controller='CategoryController')
+    h3 Categories
+
+    form(name='create-category', ng-keyup="$event.keyCode == 13 && create()")
+      input(required, ng-model='newCategory.name', type='text', name='name', placeholder='Create a new category')
+      input(required, ng-model='newCategory.slug', type='text', name='name', placeholder='Slug')
+      textarea(ng-model='newCategory.description', placeholder='Description')
+      select(ng-model="newCategory.parent", name="parent", ng-options="cat.name group by cat.parent.name for cat in categories")
+      button(ng-click='create()' ng-disabled='newCategory.name == null') Create {{newCategory.name}}
+
+    section
+        h4 Existing Categories
+        ul
+          li(class='border-left-variable', ng-repeat='cat in categories')
+            h3(ng-bind='cat.name')
+            p(ng-bind='cat.description')
+            button(ng-click='edit(cat)') Edit
+            button(ng-click='delete(cat)') Delete
