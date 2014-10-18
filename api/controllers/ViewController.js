@@ -1,7 +1,7 @@
 module.exports = {
     render: function(req, res, next) {
-      console.log("PASSOVER: Rendering skeleton HTML with injected session vars");
-      console.log(req.session.passport);
+      var project = require('../../package.json');
+
       if(req.session.passport !== undefined) {
         console.log("PASSOVER: Passport session initialised:");
         console.log(req.session.passport.user);
@@ -12,6 +12,6 @@ module.exports = {
         var session = JSON.stringify({ user: { name: 'Logged out', uid: "0" } });
       }
 
-      res.view('default', { session: session });
+      res.view('default', { session: session, project: project });
     }
 }
