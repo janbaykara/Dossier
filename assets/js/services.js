@@ -19,7 +19,9 @@ app.factory('Category', function($resource) {
   });
 });
 
-app.factory('SessionService', function($http, $state, $location, User) {
+//
+
+app.factory('SessionService', function($http, $state, User) {
   var bogusSession = injectedSession, whitelist = [], user, userData, status;
 
   function init() {            // Logged in  : Logged out
@@ -51,16 +53,6 @@ app.factory('SessionService', function($http, $state, $location, User) {
         bogusSession = null; init();
         if($state.current.name != 'signin') $state.go("index");
       })
-    },
-    checkAuth: function(to,from) {
-      if(this.status() == false) {         console.log("GATEKEEPER: Hello, visitor.");
-        if(whitelist.indexOf(to) == -1)    console.log("--GATEKEEPER: Snooping where you shouldn't? To / with you.")
-          $location.path('/');
-      } else {                             console.log("GATEKEEPER: You're logged in.");
-        if(!from && !window.location.hash.substr(2)) {
-          $location.path('/home');         console.log("--GATEKEEPER: But wandering aimlessly, let's take you /#/home");
-        }
-      }
     }
   };
 });
