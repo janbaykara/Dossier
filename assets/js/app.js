@@ -56,21 +56,12 @@ app.run(function ($rootScope, $location, $state, SessionService, $urlRouter) {
   // @@@ ^^^ Encapsulate in modular helper functions
   // See: https://stackoverflow.com/questions/21891218/using-state-methods-with-statechangestart-tostate-and-fromstate-in-angular-ui
   function checkAuth(to,from,event) {
-      var hash = window.location.hash.substr(2);
-      console.log("STATUS: "+SessionService.status()+" || FROM: "+from+" || TO: "+to+" || HASH: "+hash);
-      if(SessionService.status() == false) {            //console.log("GATEKEEPER: Hello, visitor.");
-        if(whitelist.indexOf(to) == -1) {               //console.log("--GATEKEEPER: Snooping where you shouldn't?")
-          event.preventDefault(); goIndex();
-        } else { asYouWere(); }
-      } else {                                          //console.log("GATEKEEPER: You're logged in.");
-        if(!from && to != 'home' && !hash) {            //console.log("--GATEKEEPER: But wandering aimlessly...");
-          event.preventDefault(); goHome();
-        } else { asYouWere(); }
-      }
-      function goIndex() { $state.go('index'); /* console.log("To / with you!"); */}
-      function goHome() { $state.go('home'); /* console.log("... let's take you /#/home."); */}
-      function asYouWere() { /* console.log("As you were."); */ }
+    if(!SessionService.status() && whitelist.indexOf(to) == -1) {
+      event.preventDefault(); $state.go('index');
+    } else if(!from && to != 'home' && !window.location.hash.substr(2)) {
+      event.preventDefault(); $state.go('home');
     }
+  }
 })
 
 app.controller('AppController', function($scope, $http, SessionService) {
