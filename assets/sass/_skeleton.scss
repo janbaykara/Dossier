@@ -3,7 +3,7 @@
 */
 
 * {
-  transition: all 0.25s cubic-bezier(.54,.27,.27,.91);
+  transition: all 0.35s #{$swift};
   box-sizing: border-box;
 }
 
@@ -11,14 +11,34 @@
   box-sizing: border-box;
 }
 
+::selection { color: $brand-color;  background: $background-color; }
+
 html, body {
   @extend .s100;
+  overflow-x: hidden;
 }
 
-::selection { color: $brand-color;  background: $background-color; }
+// State/view scaffolding
 
 .app__content {
   max-width: 640px;
   margin: 0 auto;
   padding: 0 1em;
+}
+
+.layout--standard {
+  height: auto;
+  overflow: visible;
+  width: 200%;
+
+  .app__view {
+    vertical-align: top;
+    width: 50%;
+    display: inline-block;
+    position: relative;
+  }
+}
+
+.layout--simple {
+  @extend .s100;
 }

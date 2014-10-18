@@ -10,6 +10,10 @@ $headings: #{'h1,h2,h3,h4,h5'};
 $pseudo-elements: #{':after, :before'};
 
 // -------
+// Useful cubic beziers
+$swift: #{"cubic-bezier(.55,0,.1,1)"};
+
+// -------
 //  Constants
 
 $golden-ratio: 1.61803398875;
