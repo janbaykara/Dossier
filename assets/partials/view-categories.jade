@@ -16,7 +16,7 @@
           li(class='border-left-variable cat-{{cat.slug}}', ng-repeat='cat in categories' ng-class="{'indent-l': isChild(cat)}")
             div.category-details
               h3(ng-bind='cat.name')
-              select(ng-model="cat.parent.id", ng-options="category.id as category.name for category in assignableCats")
+              select(ng-model="cat.parent.id", ng-options="category.id as category.name for category in assignableCats | hideIfThis:cat")
               p(ng-bind='cat.description')
               button(ng-click='edit(cat)') Edit
               button(ng-click='delete(cat)') Delete

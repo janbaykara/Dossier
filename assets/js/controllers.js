@@ -38,6 +38,7 @@ app.controller('CategoryController', function($scope, Category) {
     $scope.category = new Category($scope.newCategory);
     Category.save($scope.category, function(cat) {
       $scope.categories[$scope.categories.length] = cat;
+      // @@@ !!! Category dropdown for newly added cats not correct until refresh
     });
   }
 
