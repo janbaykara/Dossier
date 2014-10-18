@@ -91,6 +91,8 @@ gulp.task('install', function () {
   // Datafiles
   gulp.task('html', function() {
     return gulp.src(dirs.dev.html)
+    .pipe(plugins.jade())
+    .pipe(plugins.rename({extname: '.html'}))
     .pipe(gulp.dest(dirs.prod.views));
   });
 

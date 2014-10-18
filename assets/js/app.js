@@ -7,45 +7,45 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '',
     abstract: true,
     views: {
-      'ui' : { templateUrl: 'partials/layout-standard' }
+      'ui' : { templateUrl: 'partials/layout-standard.html' }
     }
   })
   .state('simple', {
     url: '',
     abstract: true,
     views: {
-      'ui' : { templateUrl: 'partials/layout-simple' }
+      'ui' : { templateUrl: 'partials/layout-simple.html' }
     }
   })
   // Content views
   .state('standard.index', {
     url: '/',
     views: {
-      'content': { templateUrl: 'partials/view-index' }
+      'content': { templateUrl: 'partials/view-index.html' }
     }
   })
   .state('simple.signin', {
     url: '/signin',
     views: {
-      'content': { templateUrl: 'partials/view-signin', controller: 'SigninController' }
+      'content': { templateUrl: 'partials/view-signin.html', controller: 'SigninController' }
     }
   })
   .state('standard.home', {
     url: '/home',
     views: {
-      'content': { templateUrl: 'partials/view-home' }
+      'content': { templateUrl: 'partials/view-home.html' }
     }
   })
   .state('standard.categories', {
     url: '/categories',
     views: {
-      'content': { templateUrl: 'partials/view-categories' }
+      'content': { templateUrl: 'partials/view-categories.html' }
     }
   })
   .state('standard.dossier', {
     url: '/dossiers/:id',
     views: {
-      'content': { templateUrl: 'partials/view-dossier' }
+      'content': { templateUrl: 'partials/view-dossier.html' }
     }
   })
 

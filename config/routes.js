@@ -36,8 +36,6 @@ module.exports.routes = {
   '/'                       : 'ViewController.render',
 
   // Render AngularJS jade partials
-  '/partials/:name'         : 'PartialController.render',
-
   '/logout'                 : 'AuthController.logout',
 
   '/auth/twitter'           : 'AuthController.twitter',
