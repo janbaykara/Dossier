@@ -7,14 +7,16 @@
       input(required, ng-model='newCategory.name', type='text', name='name', placeholder='Create a new category')
       input(required, ng-model='newCategory.slug', type='text', name='name', placeholder='Slug')
       textarea(ng-model='newCategory.description', placeholder='Description')
-      select(ng-model="newCategory.parent", name="parent", ng-options="cat.name group by cat.parent.name for cat in categories")
+      select(ng-model="newCategory.parent", name="parent", ng-options="cat.name for cat in assignableCats")
       button(ng-click='create()' ng-disabled='newCategory.name == null') Create {{newCategory.name}}
 
     section
         h4 Existing Categories
         ul
-          li(class='border-left-variable', ng-repeat='cat in categories')
-            h3(ng-bind='cat.name')
-            p(ng-bind='cat.description')
-            button(ng-click='edit(cat)') Edit
-            button(ng-click='delete(cat)') Delete
+          li(class='border-left-variable cat-{{cat.slug}}', ng-repeat='cat in categories' ng-class="{'indent-l': isChild(cat)}")
+            div.category-details
+              h3(ng-bind='cat.name')
+              select(ng-model="cat.parent.id", ng-options="category.id as category.name for category in assignableCats")
+              p(ng-bind='cat.description')
+              button(ng-click='edit(cat)') Edit
+              button(ng-click='delete(cat)') Delete

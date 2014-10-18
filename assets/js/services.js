@@ -5,6 +5,8 @@ app.factory('User', function($resource) {
   });
 });
 
+//
+
 app.factory('Dossier', function($resource) {
   return $resource('/api/dossiers/:id',
     { id: '@resource_id' }, {
@@ -12,11 +14,25 @@ app.factory('Dossier', function($resource) {
   });
 });
 
+//
+
 app.factory('Category', function($resource) {
-  return $resource('/api/categories/:id',
+  Category = $resource('/api/categories/:id',
     { id: '@resource_id' }, {
       'search': { method: 'GET', isArray: true }
   });
+
+  Category.isChild = function(cat) {
+    if(cat.parent && cat.parent.id != null) return true;
+    else return false;
+  }
+
+  Category.root = {
+    id: null,
+    name: "Uncategorised"
+  }
+
+  return Category;
 });
 
 //

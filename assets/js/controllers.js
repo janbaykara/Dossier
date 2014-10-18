@@ -7,7 +7,6 @@ app.controller('DossierController', function($scope, Dossier, SessionService, Us
   // Get User's dossiers
   $scope.user = User.query({uid: SessionService.user().uid}, function(usr) {
     $scope.user = $scope.user[0];
-    console.log($scope.user);
   });
 
   $scope.categories = Category.query();
@@ -28,7 +27,12 @@ app.controller('DossierController', function($scope, Dossier, SessionService, Us
 });
 
 app.controller('CategoryController', function($scope, Category) {
+  $scope.newCategory = {};
+
   $scope.categories = Category.query();
+  $scope.assignableCats = Category.query({parent: "null"}, function() {
+    $scope.newCategory.parent = $scope.assignableCats[$scope.assignableCats.length] = Category.root;
+  });
 
   $scope.create = function() {
     $scope.category = new Category($scope.newCategory);
@@ -43,10 +47,5 @@ app.controller('CategoryController', function($scope, Category) {
     });
   }
 
-  $scope.validCategory = function() {
-    if(newCategory.name == null)
-      return false;
-    else
-      return true;
-  }
+  $scope.isChild = function(cat) { return Category.isChild(cat); }
 });
