@@ -28,3 +28,8 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   hyphens: auto;
 }
+
+// Sizes
+@each i for 1 through 5 {
+  h#{i} { font-size: ((5 - i) * $perfect-fifth)em }
+}

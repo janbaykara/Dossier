@@ -75,9 +75,9 @@ gulp.task('install', function () {
   // Project JS
   gulp.task('js', function() {
     return gulp.src(dirs.dev.js)
-    .pipe(plugins.concat('app.min.js'))
     .pipe(plugins.size({showFiles: true}))
     .pipe(plugins.uglifyjs({mangle: false}))
+    .pipe(plugins.concat('app.min.js'))
     .pipe(plugins.size({showFiles: true}))
     .pipe(gulp.dest(dirs.prod.scripts));
   });

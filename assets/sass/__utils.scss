@@ -14,13 +14,25 @@ $pseudo-elements: #{':after, :before'};
 $swift: #{"cubic-bezier(.55,0,.1,1)"};
 
 // -------
-//  Constants
+//  Mathematical constants
 
-$golden-ratio: 1.61803398875;
-$silver-ratio: 2.4142135623730950488;
-$euler-number: 2.71828;
+$minor-second:        1.067;
+$major-second:        1.125;
+
+$minor-third:         1.200;
+$major-third:         1.250;
+
+$perfect-fourth:      1.333;
+$augmented-fourth:    1.414;
+
+$perfect-fifth:       1.500;
+
+$golden-ratio:        1.61803398875;
+$silver-ratio:        2.4142135623730950488;
+
+$euler-number:        2.71828;
 $pythagoras-constant: 1.4142135623;
-$pi: 3.14159265359;
+$pi:                  3.14159265359;
 
 // -------
 //  Utility classes

@@ -30,6 +30,8 @@
   .s#{$i}0 { @extend .w#{$i}0; @extend .h#{$i}0; }
   // .s#{$i}0 { width: $i * 10%; height: $i * 10%; }
 }
+//
+.indent-l { margin-left: 30px; }
 
 // ------ Typographical -------
 //

@@ -18,3 +18,9 @@
   padding: 1em 0;
   border-top: 1px solid #EEE;
 }
+
+.cat-list {
+  &__item {
+    &--child { @extend .indent-l; }
+  }
+}

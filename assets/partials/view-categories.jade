@@ -12,8 +12,8 @@
 
     section
         h4 Existing Categories
-        ul
-          li(class='border-left-variable cat-{{cat.slug}}', ng-repeat='cat in categories' ng-class="{'indent-l': isChild(cat)}")
+        ul.cat-list
+          li(class='category-{{cat.slug}} cat-list__item', ng-repeat='cat in categories' ng-class="{'cat-list__item--child': isChild(cat)}")
             div.category-details
               h3(ng-bind='cat.name')
               select(ng-model="cat.parent.id", ng-options="category.id as category.name for category in assignableCats | hideIfThis:cat")
