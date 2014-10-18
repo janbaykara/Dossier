@@ -67,7 +67,7 @@ app.factory('SessionService', function($http, $state, User) {
     logout: function() {
       $http.get("/logout").then(function (data, status, headers, config) {
         bogusSession = null; init();
-        if($state.current.name != 'signin') $state.go("index");
+        if($state.current.name != 'simple.signin') $state.go("standard.index");
       })
     }
   };
