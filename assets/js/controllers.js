@@ -48,5 +48,9 @@ app.controller('CategoryController', function($scope, Category) {
     });
   }
 
+  $scope.edit = function(category) {
+    Category.update({id: category.id}, category);
+  }
+
   $scope.isChild = function(cat) { return Category.isChild(cat); }
 });

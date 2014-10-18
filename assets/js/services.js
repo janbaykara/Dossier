@@ -1,7 +1,7 @@
 app.factory('User', function($resource) {
   return $resource('/api/users/:id',
     { id: '@resource_id' }, {
-      'search': { method: 'GET', isArray: true }
+      update: { method: 'PUT' }
   });
 });
 
@@ -10,7 +10,7 @@ app.factory('User', function($resource) {
 app.factory('Dossier', function($resource) {
   return $resource('/api/dossiers/:id',
     { id: '@resource_id' }, {
-      'search': { method: 'GET', isArray: true }
+      update: { method: 'PUT' }
   });
 });
 
@@ -19,7 +19,7 @@ app.factory('Dossier', function($resource) {
 app.factory('Category', function($resource) {
   Category = $resource('/api/categories/:id',
     { id: '@resource_id' }, {
-      'search': { method: 'GET', isArray: true }
+      update: { method: 'PUT' }
   });
 
   Category.isChild = function(cat) {
