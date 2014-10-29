@@ -13,7 +13,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "postinstall": "node node_modules/.bin/gulp default"
+    "postinstall": "bower install && node node_modules/.bin/gulp default"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,7 @@
     "passport-twitter": "*",
     "rc": "~0.5.0",
     "sails": "~0.10.5",
-    "sails-mongo": "^0.10.4"
-  },
-  "devDependencies": {
+    "sails-mongo": "^0.10.4",
     "bower": "*",
     "del": "*",
     "gulp": "^3.8.8",
