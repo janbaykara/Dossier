@@ -35,11 +35,6 @@ var dirs = {
   }
 }
 
-gulp.task('install', function () {
-  return gulp.src(dirs.dev.config)
-  .pipe(plugins.install());
-});
-
 // ----------------------------------------------------------------
 // Styles
 
@@ -108,7 +103,7 @@ gulp.task('install', function () {
     gulp.task('svg', function() {
       return gulp.src(dirs.dev.svg)
       .pipe(plugins.svgmin())
-      .pipe(plugins.replace(/_[0-9]+_/g, '')) // Illustrator SVGs; strip appended strings from id names
+      // .pipe(plugins.replace(/_[0-9]+_/g, '')) // Illustrator SVGs; strip appended strings from id names
       .pipe(gulp.dest(dirs.prod.images));
     });
 
@@ -132,5 +127,5 @@ gulp.task('watch', function() {
 
 gulp.task('assets', ['img', 'svg', 'fonts']);
 gulp.task('build', ['css', 'js', 'libs', 'html', 'data']);
-gulp.task('init', ['install', 'build', 'assets', 'watch']);
+gulp.task('init', ['build', 'assets', 'watch']);
 gulp.task('default', ['build', 'watch']);
