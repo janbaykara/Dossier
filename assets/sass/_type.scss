@@ -1,0 +1,35 @@
+/* ------
+  Type
+*/
+
+// Typefaces
+%body-type {
+  font: 16px/1.3em 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+}
+html, body {
+  @extend %body-type;
+}
+
+// %header-type {
+//   @extend %body-type;
+// }
+// #{$headings} {
+//   @extend %header-type;
+// }
+
+// Rendering
+* {
+  font: {
+    feature-settings: "kern";
+    kerning: normal;
+    smoothing: antialiased;
+  }
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  hyphens: auto;
+}
+
+// Sizes
+@for $i from 1 through 5 {
+  h#{$i}, .f#{$i} { letter-spacing: -0.05em; font-size: ((6em - $i) * $perfect-fifth) }
+}

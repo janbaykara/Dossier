@@ -1,0 +1,99 @@
+/* -------
+  Utils
+*/
+
+// -------
+//  Groupings
+
+$inputs: #{"input[type='text'], input[type='password'], input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='month'], input[type='week'], input[type='email'], input[type='number'], input[type='search'], input[type='tel'], input[type='time'], input[type='url'], input[type='color'], textarea"};
+$headings: #{'h1,h2,h3,h4,h5'};
+$pseudo-elements: #{':after, :before'};
+
+// -------
+// Useful cubic beziers
+$swift: #{"cubic-bezier(.55,0,.1,1)"};
+
+// -------
+//  Mathematical constants
+
+$minor-second:        1.067;
+$major-second:        1.125;
+
+$minor-third:         1.200;
+$major-third:         1.250;
+
+$perfect-fourth:      1.333;
+$augmented-fourth:    1.414;
+
+$perfect-fifth:       1.500;
+
+$golden-ratio:        1.61803398875;
+$silver-ratio:        2.4142135623730950488;
+
+$euler-number:        2.71828;
+$pythagoras-constant: 1.4142135623;
+$pi:                  3.14159265359;
+
+// -------
+//  Utility classes
+
+.clearfix {
+    *zoom: 1;
+
+    &:before, &:after {
+        content: ' ';
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+// -------
+//  Utility mixins/functions
+
+@function ensureTextContrast($text-color, $background-color) {
+  /* Checking text lightness difference from accent background */
+  $diff: lightness($text-color) - lightness($background-color);
+
+  /* If low brightness difference */
+  @if abs($diff) < 15% {
+
+    /* Dark background */
+    @if lightness($background-color) < lightness(#aaaaaa) {
+      @return lighten($text-color, 30%);
+    }
+
+    /* Light background */
+    @else {
+      @return darken($text-color, 30%);
+    }
+  }
+
+  /* High enough contrast; @return original color */
+  @else {
+    @return $text-color;
+  }
+}
+
+@mixin no-webkit {
+    appearance: none;
+    border: none;
+    background: none;
+    color: grey;
+    font: inherit;
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+    width: auto;
+
+    &:focus {
+      outline: none !important;
+    }
+}
+
+@mixin golden-ratio($this: major,$length: 100%) {
+  if: $this = major { $gr-length: $length / $golden-ratio; }
+  if: $this = minor { $gr-length: $length - ($length / $golden-ratio); }
+}

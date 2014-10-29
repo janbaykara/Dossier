@@ -1,0 +1,27 @@
+doctype html
+html(ng-app='Dossier.io', lang='en-gb')
+  head
+    //- Technical
+    meta(charset='utf8')
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    //- Meta
+    title #{project.name}
+    meta(name="author", content="Jan Baykara")
+    meta(name="description", content="#{project.description}")
+
+    //- @@@ +++ Generate favicons with Gulp
+
+    //- Styles
+    link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='styles/app.min.css')
+
+    //- Scripts
+    script(src='scripts/libs.min.js')
+    script(src='scripts/app.min.js')
+    script.
+      // @@@ ^^^ Replace this with some sort of session cookie parsing
+      injectedSession = !{session};
+
+  body(role='application', ng-controller='AppController', ui-view='ui')

@@ -1,0 +1,26 @@
+/* ------
+  Organisms
+*/
+
+.app__header {
+  margin-bottom: 1em;
+  border-bottom: 1px solid $silver;
+
+  padding: 5em 0 1em;
+
+  &--quiet {
+    padding: 0.5em;
+  }
+}
+
+.app__footer {
+  margin-top: 1em;
+  padding: 1em 0;
+  border-top: 1px solid #EEE;
+}
+
+.cat-list {
+  &__item {
+    &--child { @extend .indent-l; }
+  }
+}
