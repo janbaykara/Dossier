@@ -12,9 +12,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "gulp",
-    "test": "mocha",
-    "debug": "node debug app.js"
+    "start": "node app",
+    "postinstall": "node node_modules/.bin/gulp default"
   },
   "repository": {
     "type": "git",
