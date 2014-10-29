@@ -1,16 +1,20 @@
 .app__content
 
-  h2.em2 Hello, {{user[0].name}}.
-
   section.homepage__dossiers(ng-controller='DossierController')
-    h3 Dossiers
     form(name='create-dossier', ng-keyup="$event.keyCode == 13 && create()")
-      input(required, ng-model='newDossier.name', type='text', name='name', placeholder='Create a new dossier')
+      input.silent.w100.h2em.br2-t.bg-white.p2.f4.aln-h-c(required, ng-model='newDossier.name', type='text', name='name', placeholder='Create a new dossier')
       textarea(ng-model='newDossier.description')
-      select(ng-model="newDossier.category", name="category", ng-options="cat.name group by cat.parent.name for cat in categories")
+      ul.box
+        li.radbtn(ng-repeat='topCat in topLevelCats' style='width: {{100 / topLevelCats.length}}%')
+          input(id='input-{{topCat.slug}}' type='radio', ng-model='newDossier.cat', ng-value='topCat.id', name='category')
+          label(for='input-{{topCat.slug}}') {{topCat.name}}
+      ul
+        li(ng-show='newDossier.cat', ng-repeat='subCat in childCats')
+          label {{subCat.name}}
+          input(type='radio', ng-model='newDossier.subcat', ng-value='subCat.id', name='subcategory')
       tags-input(class='js-tags-input', ng-model="newDossier.tags", placeholder="Tag this Dossier", replace-spaces-with-dashes="false")
     section
-      h4 Your dossiers
+      h2.f5 Your dossiers
       ul
         li(ng-repeat='dossier in user.dossiers')
           h3(ng-bind='dossier.name')

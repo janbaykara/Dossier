@@ -30,6 +30,6 @@ html, body {
 }
 
 // Sizes
-@each i for 1 through 5 {
-  h#{i} { font-size: ((5 - i) * $perfect-fifth)em }
+@for $i from 1 through 5 {
+  h#{$i}, .f#{$i} { letter-spacing: -0.05em; font-size: ((6em - $i) * $perfect-fifth) }
 }

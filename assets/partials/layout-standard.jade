@@ -1,10 +1,10 @@
-header.app__header.bg-brand(role='banner')
+header.app__header
   .app__content
-    span.em4.bold.black.app__header__title Dossier
+    h1.aln-h-c.black.app__header__title Dossier
     nav.h-li.app__nav(role='menubar')
-      a(ng-show='sessionStatus()' ng-click='logout()') Logout
-      a(ui-sref='standard.home') Home
-      a(ui-sref='standard.categories') Categories
+      a.em_8(ng-show='sessionStatus()' ng-click='logout()') Logout
+      a.em_8(ui-sref='standard.home') Home
+      a.em_8(ui-sref='standard.categories') Categories
 
 main.app__body.layout--standard
   div.app__view(ui-view='content')

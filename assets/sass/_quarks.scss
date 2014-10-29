@@ -17,11 +17,15 @@
 .fl-r { float: right; }
 .fl-n { float: none; }
 //
+.p1 { padding: 1em; }
+.p2 { padding: 2em; }
+.p3 { padding: 3em; }
+//
 .aln-v-t  { vertical-align: top; }
 .aln-v-m  { vertical-align: middle; }
 .aln-v-b  { vertical-align: bottom; }
 .aln-h-l  { text-align: left; }
-.aln-h-m  { text-align: center; }
+.aln-h-c  { text-align: center; }
 .aln-h-r  { text-align: right; }
 // Scales
 @for $i from 1 through 10 {

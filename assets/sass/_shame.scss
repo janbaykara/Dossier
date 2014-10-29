@@ -4,3 +4,52 @@
   Where bad CSS goes to repent.
   Diffs here are never committed to Git. Ever. Or... y'know...
 */
+
+input.silent {
+  border: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  outline: none;
+  color: inherit;
+
+  &:focus { outline: none;  }
+}
+
+@for $i from 1 through 10 {
+  .br#{$i} { border-radius: 2px * $i }
+  .br#{$i}-t { border-top-left-radius: 2px * $i; border-top-right-radius: 2px * $i }
+  .br#{$i}-b { border-bottom-left-radius: 2px * $i; border-bottom-right-radius: 2px * $i }
+  .br#{$i}-l { border-left-radius: 2px * $i }
+  .br#{$i}-r { border-right-radius: 2px * $i }
+}
+
+.box {
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.radbtn {
+  display: inline-block;
+  margin: 0;
+  position: relative;
+
+  input {
+    display: none;
+  }
+
+  label {
+    color: rgb(163, 163, 163);
+    padding: 40px;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    background: #ebc915;
+  }
+
+  :checked + label {
+    background:
+  }
+}

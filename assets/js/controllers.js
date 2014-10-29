@@ -4,12 +4,29 @@ app.controller('SigninController', function($scope, SessionService) {
 });
 
 app.controller('DossierController', function($scope, Dossier, SessionService, User, Category) {
+  $scope.newDossier = {};
+
   // Get User's dossiers
   $scope.user = User.query({uid: SessionService.user().uid}, function(usr) {
     $scope.user = $scope.user[0];
   });
 
   $scope.categories = Category.query();
+  $scope.topLevelCats = Category.query({parent: "null"});
+
+  var currentTopCat = null;
+  if($scope.newDossier.cat != currentTopCat) {
+    $scope.childCats = Category.query({parent: $scope.newDossier.cat});
+    currentTopCat = $scope.newDossier.cat;
+    console.log($scope.newDossier.cat)
+    console.log($scope.newDossier.childCats)
+  }
+
+  if($scope.newDossier.subcategory != null) {
+    $scope.newDossier.category = $scope.newDossier.subcat;
+  } else {
+    $scope.newDossier.category = $scope.newDossier.cat;
+  }
 
   $scope.create = function() {
     $scope.newDossier.user = $scope.user.uid

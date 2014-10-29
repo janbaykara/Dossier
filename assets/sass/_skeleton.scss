@@ -16,6 +16,7 @@
 html, body {
   @extend .s100;
   overflow-x: hidden;
+  @extend .bg-silver;
 }
 
 // State/view scaffolding
