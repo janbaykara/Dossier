@@ -13,7 +13,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "postinstall": "bower install && node node_modules/.bin/gulp default"
+    "postinstall": "bower install && gulp"
   },
   "repository": {
     "type": "git",
